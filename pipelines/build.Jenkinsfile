@@ -1,7 +1,6 @@
 // pipelines/build.Jenkinsfile
 
 pipeline {
-    agent any
     agent {
        label 'general'
     }
