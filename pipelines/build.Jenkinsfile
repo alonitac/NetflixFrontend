@@ -8,20 +8,34 @@ pipeline {
     triggers {
         githubPush()
     }
+    environment {
+        // GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+        // TIMESTAMP = new Date().format("yyyyMMdd-HHmmss")
+
+        IMAGE_TAG = v1.0.$BUILD_NUMBER
+        IMAGE_BASE_NAME = 'netflix-app'
+
+        DOCKER_USERNAME = credentials('dockerhub').username
+        DOCKER_PASS = credentials('dockerhub').password
+    }
 
 
     stages {
-        stage('Build app container') {
+        stage('Docker setup') {
             steps {
-
                 sh '''
-                    # your pipeline commands here....
-                    
-                    # for example list the files in the pipeline workdir
-                    ls 
-                    
-                    # build an image
-                    docker build -t netflix-front .
+                  docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
+                '''
+            }
+        }
+
+        stage('Build & Push') {
+            steps {
+                sh '''
+                  IMAGE_FULL_NAME=$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG
+
+                  docker build -t $IMAGE_FULL_NAME .
+                  docker push $IMAGE_FULL_NAME
                 '''
             }
         }
