@@ -12,8 +12,8 @@ pipeline {
         // GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         // TIMESTAMP = new Date().format("yyyyMMdd-HHmmss")
 
-        zero_value=0
-        IMAGE_TAG = v1.zero_value.$BUILD_NUMBER
+
+        IMAGE_TAG = 0.0.$BUILD_NUMBER
         IMAGE_BASE_NAME = 'netflix-app'
 
         DOCKER_USERNAME = credentials('dockerhub').username
