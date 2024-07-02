@@ -12,6 +12,7 @@ pipeline {
     stages {
         stage('Build app container') {
             steps {
+                cleanWs()
                 sh '''
                     # your pipeline commands here....
                     
