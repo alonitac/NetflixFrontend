@@ -9,6 +9,7 @@ pipeline {
         githubPush()
     }
 
+
     stages {
         stage('Build app container') {
             steps {
