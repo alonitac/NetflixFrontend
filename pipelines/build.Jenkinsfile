@@ -15,9 +15,12 @@ pipeline {
 
         IMAGE_TAG = 'v1.0.$BUILD_NUMBER'
         IMAGE_BASE_NAME = 'netflix-app'
+        DOCKER_CREDENTIALS = credentials('dockerhub')
+        DOCKER_USERNAME = "${DOCKER_CREDENTIALS_USR}"
+        DOCKER_PASS = "${DOCKER_CREDENTIALS_PSW}"
 
-        DOCKER_USERNAME = 'credentials('dockerhub').username'
-        DOCKER_PASS = 'credentials('dockerhub').password'
+        //DOCKER_USERNAME = credentials('dockerhub').username
+        //DOCKER_PASS = credentials('dockerhub').password
     }
 
 
