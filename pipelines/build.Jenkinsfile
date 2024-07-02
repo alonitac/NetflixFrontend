@@ -13,7 +13,7 @@ pipeline {
         // TIMESTAMP = new Date().format("yyyyMMdd-HHmmss")
 
 
-        IMAGE_TAG = 0.0.$BUILD_NUMBER
+        IMAGE_TAG = 'v1.0.$BUILD_NUMBER'
         IMAGE_BASE_NAME = 'netflix-app'
 
         DOCKER_USERNAME = credentials('dockerhub').username
