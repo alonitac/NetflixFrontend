@@ -37,7 +37,8 @@ pipeline {
         stage('Build & Push') {
             steps {
                 sh '''
-                  env.IMAGE_FULL_NAME="$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG"
+                  def imageFullName = "${DOCKER_USERNAME}/${IMAGE_BASE_NAME}:${IMAGE_TAG}"
+                  env.IMAGE_FULL_NAME=imageFullName
 
                   docker build -t $IMAGE_FULL_NAME .
                   docker push $IMAGE_FULL_NAME
