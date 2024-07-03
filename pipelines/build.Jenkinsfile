@@ -38,6 +38,7 @@ pipeline {
             steps {
                 sh '''
 
+
                   IMAGE_FULL_NAME=$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG
 
 
