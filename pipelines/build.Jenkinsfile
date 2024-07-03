@@ -37,7 +37,7 @@ pipeline {
         stage('Build & Push') {
             steps {
                 sh '''
-                  IMAGE_FULL_NAME=$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG
+                  env.IMAGE_FULL_NAME=$DOCKER_USERNAME/$IMAGE_BASE_NAME:$IMAGE_TAG
 
                   docker build -t $IMAGE_FULL_NAME .
                   docker push $IMAGE_FULL_NAME
@@ -48,7 +48,7 @@ pipeline {
             steps {
                build job: 'NetflixFrontendDeploy' , wait: false, parameters: [
                  string(name: 'SERVICE_NAME', value: "NetflixFrontend"),
-                 string(name: 'IMAGE_FULL_NAME_PARAM', value: "$IMAGE_FULL_NAME")
+                 string(name: 'IMAGE_FULL_NAME_PARAM', value: "${env.IMAGE_FULL_NAME}")
                ]
             }
         }
